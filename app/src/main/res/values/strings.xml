@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MoneyTrack</string>
+    <string name="new_account"><u>Create account</u></string>
+</resources>

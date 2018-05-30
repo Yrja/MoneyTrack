@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "228012091039",
+    "firebase_url": "https://moneytracker-5fb4e.firebaseio.com",
+    "project_id": "moneytracker-5fb4e",
+    "storage_bucket": "moneytracker-5fb4e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:228012091039:android:7f440a12f513b8c4",
+        "android_client_info": {
+          "package_name": "com.example.vitalina.moneytrack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "228012091039-lpni6ea7ms44vqphlnqdc6nt6u35ccdf.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "228012091039-lpni6ea7ms44vqphlnqdc6nt6u35ccdf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhqyGrUjRItXUPMKtHpN8OsXa86byV91c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

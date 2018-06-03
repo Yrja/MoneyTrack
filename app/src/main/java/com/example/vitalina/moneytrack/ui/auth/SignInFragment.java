@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,18 +39,14 @@ public class SignInFragment extends Fragment implements AuthView{
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        vConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.login(vEmail.getText().toString(),vPassword.getText().toString());
+        vConfirm.setOnClickListener(view1 -> {
+            if (!vEmail.getText().toString().isEmpty() && !vPassword.getText().toString().isEmpty()) {
+                presenter.login(vEmail.getText().toString(), vPassword.getText().toString());
+            } else {
+                onLoginFailed("Credentials not filled");
             }
         });
-        vSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((MainActivity) getActivity()).goToSignpUp();
-            }
-        });
+        vSignUp.setOnClickListener(view12 -> ((MainActivity) getActivity()).goToSignpUp());
     }
 
     @Override

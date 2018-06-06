@@ -10,4 +10,8 @@
         android:id="@+id/menu_categories"
         android:title="Categories"
         android:icon="@drawable/ic_money"/>
+    <item
+        android:id="@+id/menu_analys"
+        android:title="Analys"
+        android:icon="@drawable/ic_chart"/>
 </menu>

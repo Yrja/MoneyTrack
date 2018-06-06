@@ -3,16 +3,16 @@ package com.example.vitalina.moneytrack.model.entities;
 public class Transaction {
     private long time;
     private String description;
-    private long sum;
+    private double sum;
     private double latitude;
-    private double langitude;
+    private double longitude;
 
     public Transaction(long time, String description, long sum, double latitude, double langitude) {
         this.time = time;
         this.description = description;
         this.sum = sum;
         this.latitude = latitude;
-        this.langitude = langitude;
+        this.longitude = langitude;
     }
 
     public Transaction() {
@@ -34,11 +34,11 @@ public class Transaction {
         this.description = description;
     }
 
-    public long getSum() {
+    public double getSum() {
         return sum;
     }
 
-    public void setSum(long sum) {
+    public void setSum(double sum) {
         this.sum = sum;
     }
 
@@ -51,10 +51,10 @@ public class Transaction {
     }
 
     public double getLongitude() {
-        return langitude;
+        return longitude;
     }
 
-    public void setLangitude(double langitude) {
-        this.langitude = langitude;
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }

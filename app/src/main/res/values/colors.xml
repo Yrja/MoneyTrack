@@ -6,4 +6,10 @@
     <color name="colorAccentSecondary">#1bbc9b</color>
     <color name="colorAccentSecondaryDark">#159178</color>
     <color name="colorError">#b30f43</color>
+
+
+    <color name="chartFirst">#de6000</color>
+    <color name="chartSecond">#0d7819</color>
+    <color name="chartThird">#6d65d1</color>
+    <color name="chartFourth">#ad40c6</color>
 </resources>

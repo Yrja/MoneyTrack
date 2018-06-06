@@ -31,8 +31,14 @@ public class CategorieFragment extends Fragment implements CategoriesView {
         adapter = new CategoriesAdapter();
         vList.setAdapter(adapter);
         presenter = new CategoriesPresenter(this);
-        presenter.getCategories();
+
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.getCategories();
     }
 
     @Override

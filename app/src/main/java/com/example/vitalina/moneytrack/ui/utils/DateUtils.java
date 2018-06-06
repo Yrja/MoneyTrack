@@ -4,7 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class DateUtils {
-    public static long getDay(Date date){
+    public static Long getDay(Date date){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.set(Calendar.MILLISECOND,0);

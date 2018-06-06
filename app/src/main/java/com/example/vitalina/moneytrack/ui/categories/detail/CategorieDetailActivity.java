@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -42,6 +43,7 @@ public class CategorieDetailActivity extends AppCompatActivity implements Transa
     private CardView vAddTransaction;
     private LinearLayout vAddContainer;
     private TextView vCancelAdd;
+    private CheckBox vLocationCheckBox;
 
     private EditText vSum, vNotes;
 
@@ -55,6 +57,7 @@ public class CategorieDetailActivity extends AppCompatActivity implements Transa
         setContentView(R.layout.activity_categorie_detail);
         vCalendar = findViewById(R.id.calendarView);
         vCancelAdd = findViewById(R.id.vCancelAdd);
+        vLocationCheckBox = findViewById(R.id.vLocationCheckBox);
         vCancelAdd.setOnClickListener(this);
         vAddContainer = findViewById(R.id.vAddContainer);
         vNotes = findViewById(R.id.vNote);
@@ -70,10 +73,10 @@ public class CategorieDetailActivity extends AppCompatActivity implements Transa
         vAddTransaction = findViewById(R.id.vAddTransaction);
         vAddTransaction.setOnClickListener(v -> {
             vAddContainer.setVisibility(View.VISIBLE);
-            if (isAdding){
-                presenter.makeTransaction(mCurrentCategorie,new Transaction(new Date().getTime(),
-                        vNotes.getText().toString(),Long.parseLong(vSum.getText().toString()),
-                        0,0));
+            if (isAdding) {
+                presenter.makeTransaction(mCurrentCategorie, new Transaction(new Date().getTime(),
+                        vNotes.getText().toString(), Long.parseLong(vSum.getText().toString()),
+                        0, 0),vLocationCheckBox.isChecked());
             } else {
                 setAdding(!isAdding);
             }
@@ -83,11 +86,11 @@ public class CategorieDetailActivity extends AppCompatActivity implements Transa
             mCurrentCategorie = (Categorie) getIntent().getSerializableExtra("categorie");
         }
 
-        presenter = new TransactionPresenter(this);
+        presenter = new TransactionPresenter(this, this);
         initCalendar();
 
-        Disposable d = addingSubject.subscribe(next->{
-            if (next){
+        Disposable d = addingSubject.subscribe(next -> {
+            if (next) {
                 vList.animate()
                         .translationX(vList.getWidth())
                         .setDuration(500);
@@ -130,10 +133,12 @@ public class CategorieDetailActivity extends AppCompatActivity implements Transa
                 presenter.loadTransaction(mCurrentCategorie, date.getTime());
             }
         });
+        presenter.loadTransaction(mCurrentCategorie, new Date());
     }
 
     @Override
-    public void onTransactionSuccess() {
+    public void onTransactionSuccess(Transaction transaction) {
+        adapter.addItems(transaction);
         setAdding(false);
         Snackbar.make(vCalendar, "success", Snackbar.LENGTH_SHORT).show();
     }
@@ -150,7 +155,7 @@ public class CategorieDetailActivity extends AppCompatActivity implements Transa
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.vCancelAdd:
                 setAdding(false);
                 break;

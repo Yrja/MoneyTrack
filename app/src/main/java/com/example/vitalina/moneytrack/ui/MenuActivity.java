@@ -4,20 +4,37 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.vitalina.moneytrack.R;
+import com.example.vitalina.moneytrack.data.AnalysFirestore;
+import com.example.vitalina.moneytrack.model.AnalysManager;
+import com.example.vitalina.moneytrack.model.entities.Categorie;
+import com.example.vitalina.moneytrack.model.entities.Transaction;
 import com.example.vitalina.moneytrack.model.entities.User;
+import com.example.vitalina.moneytrack.ui.analys.AnalysFragment;
 import com.example.vitalina.moneytrack.ui.auth.SignUpFragment;
 import com.example.vitalina.moneytrack.ui.categories.CategorieFragment;
 import com.example.vitalina.moneytrack.ui.profile.ProfileFragment;
 
+import java.util.HashMap;
+
+import io.reactivex.Scheduler;
+import io.reactivex.schedulers.Schedulers;
+
 public class MenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private DrawerLayout vDrawer;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
+        vDrawer = findViewById(R.id.vDrawerLayout);
+
         if (getIntent().getExtras() != null && !getIntent().getExtras().isEmpty()) {
             switch (getIntent().getIntExtra("action", 0)) {
                 case SignUpFragment.USER_CREATED:
@@ -39,9 +56,16 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 .replace(R.id.container, ProfileFragment.newInstance(user))
                 .commit();
     }
+
     public void goToCategories() {
         getFragmentManager().beginTransaction()
-                .replace(R.id.container,new CategorieFragment())
+                .replace(R.id.container, new CategorieFragment())
+                .commit();
+    }
+
+    public void goToAnalys() {
+        getFragmentManager().beginTransaction()
+                .replace(R.id.container, new AnalysFragment())
                 .commit();
     }
 
@@ -54,7 +78,11 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
             case R.id.menu_categories:
                 goToCategories();
                 break;
+            case R.id.menu_analys:
+                goToAnalys();
+                break;
         }
+        vDrawer.closeDrawers();
         return true;
     }
 }

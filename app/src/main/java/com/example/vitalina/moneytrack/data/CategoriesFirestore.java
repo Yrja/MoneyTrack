@@ -76,6 +76,7 @@ public class CategoriesFirestore {
     }
 
     public Completable updateFreeMoney(Categorie categorie, Transaction transaction) {
+        //TODO BUG HERE
         return Completable.create(emitter -> {
             db.collection("users")
                     .document(FirebaseAuth.getInstance().getUid())

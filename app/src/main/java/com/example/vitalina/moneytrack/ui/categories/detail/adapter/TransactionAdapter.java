@@ -15,4 +15,8 @@ public class TransactionAdapter extends AbstractRecyclerAdapter<Transaction, Tra
         return new TransactionHolder(LayoutInflater.from(parent.getContext()).inflate(
                 R.layout.item_transaction, parent, false));
     }
+    public void addItems(Transaction transaction){
+        items.add(0,transaction);
+        notifyItemInserted(0);
+    }
 }

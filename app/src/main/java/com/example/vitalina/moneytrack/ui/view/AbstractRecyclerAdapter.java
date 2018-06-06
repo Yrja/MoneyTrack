@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class  AbstractRecyclerAdapter <T, V extends BaseHolder<T>> extends RecyclerView.Adapter<V> {
-    private ArrayList<T> items = new ArrayList<>();
+    protected ArrayList<T> items = new ArrayList<>();
 
     public void setItems(List<T> items) {
         this.items.clear();

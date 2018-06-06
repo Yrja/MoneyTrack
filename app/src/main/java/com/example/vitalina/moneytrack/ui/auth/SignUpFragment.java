@@ -76,10 +76,15 @@ public class SignUpFragment extends Fragment implements SignUpView, TextWatcher 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         vConfirm.setOnClickListener(view12 -> {
-            if (!vPassword.getText().toString().equals(vConfirmPassword.getText().toString())) {
-                Toast.makeText(getActivity(), "Passwords does`nt mismatch", Toast.LENGTH_SHORT).show();
+            if (vPassword.getText().toString().isEmpty() || vConfirmPassword.getText().toString().isEmpty()
+                    || vEmail.getText().toString().isEmpty()){
+                Toast.makeText(getActivity(), "Fill all fields", Toast.LENGTH_SHORT).show();
             } else {
-                signUpPresenter.signUp(vEmail.getText().toString(), vPassword.getText().toString());
+                if (!vPassword.getText().toString().equals(vConfirmPassword.getText().toString())) {
+                    Toast.makeText(getActivity(), "Passwords does`nt mismatch", Toast.LENGTH_SHORT).show();
+                } else {
+                    signUpPresenter.signUp(vEmail.getText().toString(), vPassword.getText().toString());
+                }
             }
         });
         vCancel.setOnClickListener(view1 -> ((MainActivity) getActivity()).goToAuth());

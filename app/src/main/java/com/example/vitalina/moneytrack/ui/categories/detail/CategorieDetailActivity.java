@@ -12,6 +12,7 @@ import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ import com.example.vitalina.moneytrack.ui.categories.detail.presenter.Transactio
 import com.example.vitalina.moneytrack.ui.categories.detail.presenter.TransactionView;
 import com.example.vitalina.moneytrack.ui.categories.presenter.CategoriesPresenter;
 import com.example.vitalina.moneytrack.ui.categories.presenter.CategoriesView;
+import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -84,6 +86,9 @@ public class CategorieDetailActivity extends AppCompatActivity implements Transa
 
         if (getIntent().getExtras() != null && !getIntent().getExtras().isEmpty()) {
             mCurrentCategorie = (Categorie) getIntent().getSerializableExtra("categorie");
+            Picasso.get().load(mCurrentCategorie.getIcon()).into(
+                    (ImageView) findViewById(R.id.categorieAvatar));
+            ((EditText)findViewById(R.id.categorieName)).setText(mCurrentCategorie.getName());
         }
 
         presenter = new TransactionPresenter(this, this);

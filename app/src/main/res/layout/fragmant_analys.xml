@@ -48,7 +48,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vTitle">
-        <android.support.v4.view.ViewPager
+        <com.example.vitalina.moneytrack.ui.view.DisableViewPager
             android:id="@+id/vPager"
             android:layout_width="match_parent"
             android:layout_height="150dp" />

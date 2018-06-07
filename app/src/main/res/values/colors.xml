@@ -12,4 +12,7 @@
     <color name="chartSecond">#0d7819</color>
     <color name="chartThird">#6d65d1</color>
     <color name="chartFourth">#ad40c6</color>
+
+    <color name="colorSelected">#801e63a9</color>
+
 </resources>

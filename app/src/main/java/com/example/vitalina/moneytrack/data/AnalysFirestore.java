@@ -204,18 +204,6 @@ public class AnalysFirestore {
         });
     }
 
-    private HashMap<Transaction, Transaction> combine(List<Transaction> propose, List<Transaction> my) {
-        HashMap<Transaction, Transaction> transactions = new HashMap<>();
-        for (Transaction myTransaction : my) {
-            for (Transaction proposeTransaction : propose) {
-                if (myTransaction.getDescription().equals(proposeTransaction.getDescription())
-                        && myTransaction.getSum() < proposeTransaction.getSum() && proposeTransaction.getSum() < 0) {
-                    transactions.put(myTransaction, proposeTransaction);
-                }
-            }
-        }
-        return transactions;
-    }
 
     public class Wrapper {
         String userId;

@@ -22,6 +22,7 @@ import com.example.vitalina.moneytrack.model.entities.SpentByCategorie;
 import com.example.vitalina.moneytrack.model.entities.Transaction;
 import com.example.vitalina.moneytrack.ui.analys.presenter.AnalysPresenter;
 import com.example.vitalina.moneytrack.ui.analys.presenter.AnalysView;
+import com.example.vitalina.moneytrack.ui.view.DisableViewPager;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.DataSet;
@@ -45,7 +46,7 @@ public class AnalysFragment extends Fragment implements AnalysView{
     private AnalysManager analysManager;
     private TextView vTitle;
     private AnalysPresenter analysPresenter;
-    private ViewPager vPager;
+    private DisableViewPager vPager;
     private ProposeAdapter adapter;
     @Nullable
     @Override
@@ -103,6 +104,7 @@ public class AnalysFragment extends Fragment implements AnalysView{
                 if (entry!=null){
                     vTitle.setText("The most you spend on \n " + entry.getValue().getCategorie() + "\n" + entry.getValue().getSum());
                     analysPresenter.startAnalys(entry.getKey());
+                    vPager.setPagingEnabled(false);
                 }
 
             }
@@ -121,5 +123,6 @@ public class AnalysFragment extends Fragment implements AnalysView{
         vPager.setAdapter(adapter);
         vPager.invalidate();
         adapter.notifyDataSetChanged();
+        vPager.setPagingEnabled(true);
     }
 }

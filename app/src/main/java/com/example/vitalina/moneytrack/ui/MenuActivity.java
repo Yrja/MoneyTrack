@@ -1,5 +1,6 @@
 package com.example.vitalina.moneytrack.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,8 +13,10 @@ import android.view.MenuItem;
 
 import com.example.vitalina.moneytrack.R;
 import com.example.vitalina.moneytrack.data.AnalysFirestore;
+import com.example.vitalina.moneytrack.data.CredentialsPreference;
 import com.example.vitalina.moneytrack.model.AnalysManager;
 import com.example.vitalina.moneytrack.model.entities.Categorie;
+import com.example.vitalina.moneytrack.model.entities.Credentials;
 import com.example.vitalina.moneytrack.model.entities.Transaction;
 import com.example.vitalina.moneytrack.model.entities.User;
 import com.example.vitalina.moneytrack.ui.analys.AnalysFragment;
@@ -80,6 +83,12 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.menu_analys:
                 goToAnalys();
+                break;
+            case R.id.menu_logout:
+                new CredentialsPreference(this).setCredentials(new Credentials(null,null));
+                Intent intent = new Intent(this,MainActivity.class);
+                startActivity(intent);
+                finish();
                 break;
         }
         vDrawer.closeDrawers();

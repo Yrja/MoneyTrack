@@ -14,4 +14,8 @@
         android:id="@+id/menu_analys"
         android:title="Analys"
         android:icon="@drawable/ic_chart"/>
+    <item
+        android:id="@+id/menu_logout"
+        android:title="Logout"
+        android:icon="@drawable/ic_power"/>
 </menu>

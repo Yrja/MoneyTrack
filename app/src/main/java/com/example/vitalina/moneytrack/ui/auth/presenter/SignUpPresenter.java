@@ -1,10 +1,12 @@
 package com.example.vitalina.moneytrack.ui.auth.presenter;
 
 import android.graphics.Bitmap;
+import android.net.Credentials;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
 import com.example.vitalina.moneytrack.data.AvatarStorage;
+import com.example.vitalina.moneytrack.data.CredentialsPreference;
 import com.example.vitalina.moneytrack.data.UserFirestore;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,20 +28,22 @@ public class SignUpPresenter {
     private UserFirestore userFirestore;
     private CompositeDisposable mDisposable = new CompositeDisposable();
     private boolean needAvatarUpload = false;
-
+    private CredentialsPreference preference;
     private Single<String> uploadAvatarTask;
 
-    public SignUpPresenter(SignUpView mView) {
+    public SignUpPresenter(SignUpView mView, CredentialsPreference preference) {
         this.mView = mView;
         mAuth = FirebaseAuth.getInstance();
         avatarStorage = new AvatarStorage();
         userFirestore = new UserFirestore();
+        this.preference = preference;
     }
 
     public void signUp(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
+                        preference.setCredentials(new com.example.vitalina.moneytrack.model.entities.Credentials(email,password));
                         if (needAvatarUpload) {
                             mDisposable.add(uploadAvatarTask
                                     .flatMap(it -> userFirestore.createNewUser(mAuth.getUid(), it))

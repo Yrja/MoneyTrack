@@ -26,17 +26,16 @@ public class CategoriesAdapter extends AbstractRecyclerAdapter<Categorie, Catego
 
     @Override
     public void setItems(List<Categorie> items) {
-       // items.add(new Categorie(-1,"",R.drawable.ic_add+"",0f));
+        items.add(new Categorie(-1,"",R.drawable.ic_add+"",0f));
         super.setItems(items);
     }
 
     @Override
     public int getItemViewType(int position) {
-//        if (position== getItemCount()-1){
-//            return ADD_ITEM;
-//        } else {
-//            return ITEM;
-//        }
-        return ITEM;
+        if (position== getItemCount()-1){
+            return ADD_ITEM;
+        } else {
+            return ITEM;
+        }
     }
 }

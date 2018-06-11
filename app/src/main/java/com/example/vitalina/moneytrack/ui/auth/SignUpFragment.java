@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.vitalina.moneytrack.R;
+import com.example.vitalina.moneytrack.data.CredentialsPreference;
 import com.example.vitalina.moneytrack.model.entities.User;
 import com.example.vitalina.moneytrack.ui.MainActivity;
 import com.example.vitalina.moneytrack.ui.MenuActivity;
@@ -89,7 +90,7 @@ public class SignUpFragment extends Fragment implements SignUpView, TextWatcher 
         });
         vCancel.setOnClickListener(view1 -> ((MainActivity) getActivity()).goToAuth());
 
-        signUpPresenter = new SignUpPresenter(this);
+        signUpPresenter = new SignUpPresenter(this, new CredentialsPreference(getActivity()));
 
     }
 

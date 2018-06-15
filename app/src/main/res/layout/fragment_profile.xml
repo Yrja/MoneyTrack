@@ -5,6 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/vCamera"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/vAvatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/vAvatar"
+        app:layout_constraintTop_toTopOf="@+id/vAvatar"
+        app:srcCompat="@drawable/ic_camera" />
+
+    <ImageView
+        android:id="@+id/vGallery"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/vAvatar"
+        app:layout_constraintEnd_toStartOf="@+id/vAvatar"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/vAvatar"
+        app:srcCompat="@drawable/ic_photo" />
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/vAvatar"
         android:layout_width="150dp"
@@ -46,8 +75,6 @@
         android:layout_marginStart="8dp"
         android:text="First name"
         android:textSize="24sp"
-        android:inputType="none"
-        android:focusable="false"
         app:layout_constraintBottom_toBottomOf="@+id/vLastName"
         app:layout_constraintEnd_toStartOf="@+id/vLastName"
         app:layout_constraintHorizontal_bias="0.5"
@@ -61,25 +88,54 @@
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:text="Last name"
-        android:inputType="none"
-        android:focusable="false"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/vPrimaryBtn"
+        app:layout_constraintBottom_toTopOf="@+id/btnContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/vFirstName"
         app:layout_constraintTop_toBottomOf="@+id/vAvatar" />
-
-    <Button
-        android:id="@+id/vPrimaryBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="32dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="Edit"
-        android:background="@drawable/primary_btn_selector"
+    <FrameLayout
+        android:id="@+id/btnContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vLastName" />
+        app:layout_constraintTop_toBottomOf="@+id/vLastName">
+        <Button
+            android:id="@+id/vPrimaryBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="Edit"
+            android:layout_gravity="center"
+            android:background="@drawable/primary_btn_selector" />
+        <LinearLayout
+            android:id="@+id/vActionContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:visibility="gone">
+            <Button
+                android:id="@+id/vSaveBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:text="Edit"
+                android:layout_gravity="center"
+                android:background="@drawable/primary_btn_selector" />
+            <Button
+                android:id="@+id/vCancelBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:text="Cancel"
+                android:layout_gravity="center"
+                android:background="@color/colorError" />
+        </LinearLayout>
+    </FrameLayout>
+
 </android.support.constraint.ConstraintLayout>

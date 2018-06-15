@@ -32,7 +32,7 @@ public class AnalysPresenter {
         Multimap<Transaction,Transaction> proposals = ArrayListMultimap.create();
         analysDisposable = firestore.findProposesForCategory(categorie)
                 .subscribeOn(Schedulers.newThread())
-                .collect(()->proposals, (i,p)-> i.putAll(p))
+                .collect(()->proposals, Multimap::putAll)
                 .doAfterSuccess(transactionTransactionHashMap -> {
                     if (mView!=null){
                         mView.displayAnalys(transactionTransactionHashMap);

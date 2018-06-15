@@ -89,4 +89,30 @@ public class CategoriesFirestore {
                     });
         });
     }
+
+    public Completable addCategorie(Categorie categorie) {
+       return Completable.create(emitter -> {
+            db.collection("users")
+                    .document(FirebaseAuth.getInstance().getUid())
+                    .collection("categories")
+                    .document(categorie.getName())
+                    .set(categorie).addOnFailureListener(emitter::onError)
+                    .addOnSuccessListener(aVoid -> {
+                        emitter.onComplete();
+                    });
+        });
+    }
+
+    public Completable deleteCategorie(Categorie categorie){
+        return Completable.create(emitter->{
+            db.collection("users")
+                    .document(FirebaseAuth.getInstance().getUid())
+                    .collection("categories")
+                    .document(categorie.getName())
+                    .delete().addOnFailureListener(emitter::onError)
+                    .addOnSuccessListener(aVoid -> {
+                        emitter.onComplete();
+                    });
+        });
+    }
 }

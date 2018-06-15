@@ -32,6 +32,13 @@ public class Categorie implements Serializable {
         this.icon = icon;
         this.freeMoney = freeMoney;
     }
+    public Categorie(int id, String name, String icon, float freeMoney, boolean createdByUser) {
+        this.id = id;
+        this.name = name;
+        this.icon = icon;
+        this.freeMoney = freeMoney;
+        this.createdByUser = createdByUser;
+    }
 
     public Categorie() {
     }

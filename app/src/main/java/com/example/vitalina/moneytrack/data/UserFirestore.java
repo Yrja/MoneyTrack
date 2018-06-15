@@ -50,4 +50,12 @@ public class UserFirestore {
                     });
         });
     }
+    public Completable updateUser(User user){
+        return Completable.create(emitter->{
+            db.collection("users").document(user.getId())
+                    .set(user)
+                    .addOnFailureListener(emitter::onError)
+                    .addOnSuccessListener(documentSnapshot -> emitter.onComplete());
+        });
+    }
 }

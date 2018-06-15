@@ -60,4 +60,8 @@ public class TransactionPresenter {
                 }));
 
     }
+    public void deleteCategory(Categorie categorie){
+        disposable.add(firestore.deleteCategorie(categorie)
+        .subscribe(()->{mView.onDeleteSuccess();}));
+    }
 }

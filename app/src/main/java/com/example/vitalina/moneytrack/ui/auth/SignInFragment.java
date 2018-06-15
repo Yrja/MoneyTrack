@@ -26,7 +26,6 @@ import com.example.vitalina.moneytrack.ui.AuthView;
 import com.example.vitalina.moneytrack.ui.MainActivity;
 import com.example.vitalina.moneytrack.ui.MenuActivity;
 import com.example.vitalina.moneytrack.ui.auth.presenter.AuthPresenter;
-import com.narayanacharya.waveview.WaveView;
 
 public class SignInFragment extends Fragment implements AuthView {
     private Button vConfirm;

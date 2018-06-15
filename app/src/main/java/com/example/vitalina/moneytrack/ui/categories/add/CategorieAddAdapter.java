@@ -6,21 +6,23 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.example.vitalina.moneytrack.R;
-import com.example.vitalina.moneytrack.ui.view.AbstractRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 
-public class CategorieAddAdapter extends RecyclerView.Adapter<CategoryIconHolder> {
+public class CategorieAddAdapter extends RecyclerView.Adapter<CategoryIconHolder> implements OnItemClick{
     private List<SelectableItem<String>> items = new ArrayList<>();
+    private int prevActivePos;
 
     @NonNull
     @Override
     public CategoryIconHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new CategoryIconHolder(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_category_icon, parent, false));
+                .inflate(R.layout.item_category_icon, parent, false), this);
     }
 
     @Override
@@ -34,12 +36,28 @@ public class CategorieAddAdapter extends RecyclerView.Adapter<CategoryIconHolder
     }
 
     public void setItems(List<String> items) {
-        Observable.fromIterable(items)
+        Disposable d =Observable.fromIterable(items)
                 .map(str -> new SelectableItem(str, false))
+                .observeOn(AndroidSchedulers.mainThread())
                 .toList()
                 .subscribe(next -> {
-                    items.clear();
-
+                    CategorieAddAdapter.this.items.clear();
+                    CategorieAddAdapter.this.items.addAll((List)next);
+                    notifyDataSetChanged();
                 });
+    }
+    public String getSelectedItem(){
+        return items.get(prevActivePos).item;
+    }
+    @Override
+    public void onItemClick(int pos) {
+        if (prevActivePos != -1 && prevActivePos!=pos) {
+            SelectableItem<String> item = items.get(prevActivePos);
+            item.setSelected(false);
+            items.set(prevActivePos,item);
+            notifyItemChanged(prevActivePos);
+        }
+        items.get(pos).setSelected(true);
+        prevActivePos = pos;
     }
 }

@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.CheckBox;
@@ -49,6 +50,7 @@ public class CategorieDetailActivity extends AppCompatActivity implements Transa
 
     private EditText vSum, vNotes;
 
+    private TextView vDelete;
 
     private boolean isAdding;
     private PublishSubject<Boolean> addingSubject = PublishSubject.create();
@@ -65,6 +67,9 @@ public class CategorieDetailActivity extends AppCompatActivity implements Transa
         vNotes = findViewById(R.id.vNote);
         vSum = findViewById(R.id.vSum);
         vList = findViewById(R.id.vList);
+        vDelete = findViewById(R.id.vDelete);
+        //vEdit = findViewById(R.id.vEdit);
+
         vList.setLayoutManager(new LinearLayoutManager(this));
         adapter = new TransactionAdapter();
         vList.setAdapter(adapter);
@@ -73,6 +78,7 @@ public class CategorieDetailActivity extends AppCompatActivity implements Transa
                 .translationX(-vAddContainer.getWidth())
                 .setDuration(500);
         vAddTransaction = findViewById(R.id.vAddTransaction);
+
         vAddTransaction.setOnClickListener(v -> {
             vAddContainer.setVisibility(View.VISIBLE);
             if (isAdding) {
@@ -89,6 +95,9 @@ public class CategorieDetailActivity extends AppCompatActivity implements Transa
             Picasso.get().load(mCurrentCategorie.getIcon()).into(
                     (ImageView) findViewById(R.id.categorieAvatar));
             ((EditText)findViewById(R.id.categorieName)).setText(mCurrentCategorie.getName());
+            vDelete.setOnClickListener(v -> {
+                presenter.deleteCategory(mCurrentCategorie);
+            });
         }
 
         presenter = new TransactionPresenter(this, this);
@@ -156,6 +165,11 @@ public class CategorieDetailActivity extends AppCompatActivity implements Transa
     @Override
     public void onTransactionsLoaded(List<Transaction> transactions) {
         adapter.setItems(transactions);
+    }
+
+    @Override
+    public void onDeleteSuccess() {
+        finish();
     }
 
     @Override
